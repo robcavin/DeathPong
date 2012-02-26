@@ -1,0 +1,464 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		959A189914FAB7E6002FCC08 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 959A189814FAB7E6002FCC08 /* UIKit.framework */; };
+		959A189B14FAB7E6002FCC08 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 959A189A14FAB7E6002FCC08 /* Foundation.framework */; };
+		959A189D14FAB7E6002FCC08 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 959A189C14FAB7E6002FCC08 /* CoreGraphics.framework */; };
+		959A189F14FAB7E6002FCC08 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 959A189E14FAB7E6002FCC08 /* GLKit.framework */; };
+		959A18A114FAB7E6002FCC08 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 959A18A014FAB7E6002FCC08 /* OpenGLES.framework */; };
+		959A18A714FAB7E6002FCC08 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 959A18A514FAB7E6002FCC08 /* InfoPlist.strings */; };
+		959A18A914FAB7E6002FCC08 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 959A18A814FAB7E6002FCC08 /* main.m */; };
+		959A18AD14FAB7E6002FCC08 /* BBJAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 959A18AC14FAB7E6002FCC08 /* BBJAppDelegate.m */; };
+		959A18B014FAB7E6002FCC08 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 959A18AE14FAB7E6002FCC08 /* MainStoryboard.storyboard */; };
+		959A18B214FAB7E6002FCC08 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 959A18B114FAB7E6002FCC08 /* Shader.fsh */; };
+		959A18B414FAB7E6002FCC08 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 959A18B314FAB7E6002FCC08 /* Shader.vsh */; };
+		959A18B714FAB7E6002FCC08 /* BBJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 959A18B614FAB7E6002FCC08 /* BBJViewController.m */; };
+		959A18BF14FAB7E6002FCC08 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 959A18BE14FAB7E6002FCC08 /* SenTestingKit.framework */; };
+		959A18C014FAB7E6002FCC08 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 959A189814FAB7E6002FCC08 /* UIKit.framework */; };
+		959A18C114FAB7E6002FCC08 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 959A189A14FAB7E6002FCC08 /* Foundation.framework */; };
+		959A18C914FAB7E6002FCC08 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 959A18C714FAB7E6002FCC08 /* InfoPlist.strings */; };
+		959A18CC14FAB7E6002FCC08 /* Death_PongTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 959A18CB14FAB7E6002FCC08 /* Death_PongTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		959A18C214FAB7E6002FCC08 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 959A188B14FAB7E5002FCC08 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 959A189314FAB7E6002FCC08;
+			remoteInfo = "Death Pong";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		959A189414FAB7E6002FCC08 /* Death Pong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Death Pong.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		959A189814FAB7E6002FCC08 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		959A189A14FAB7E6002FCC08 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		959A189C14FAB7E6002FCC08 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		959A189E14FAB7E6002FCC08 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		959A18A014FAB7E6002FCC08 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		959A18A414FAB7E6002FCC08 /* Death Pong-Info.plist */ = {isa = PBXFileReference; path = "Death Pong-Info.plist"; sourceTree = "<group>"; };
+		959A18A614FAB7E6002FCC08 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		959A18A814FAB7E6002FCC08 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		959A18AA14FAB7E6002FCC08 /* Death Pong-Prefix.pch */ = {isa = PBXFileReference; path = "Death Pong-Prefix.pch"; sourceTree = "<group>"; };
+		959A18AB14FAB7E6002FCC08 /* BBJAppDelegate.h */ = {isa = PBXFileReference; path = BBJAppDelegate.h; sourceTree = "<group>"; };
+		959A18AC14FAB7E6002FCC08 /* BBJAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BBJAppDelegate.m; sourceTree = "<group>"; };
+		959A18AF14FAB7E6002FCC08 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		959A18B114FAB7E6002FCC08 /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
+		959A18B314FAB7E6002FCC08 /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
+		959A18B514FAB7E6002FCC08 /* BBJViewController.h */ = {isa = PBXFileReference; path = BBJViewController.h; sourceTree = "<group>"; };
+		959A18B614FAB7E6002FCC08 /* BBJViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BBJViewController.m; sourceTree = "<group>"; };
+		959A18BD14FAB7E6002FCC08 /* Death PongTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Death PongTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		959A18BE14FAB7E6002FCC08 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		959A18C614FAB7E6002FCC08 /* Death PongTests-Info.plist */ = {isa = PBXFileReference; path = "Death PongTests-Info.plist"; sourceTree = "<group>"; };
+		959A18C814FAB7E6002FCC08 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		959A18CA14FAB7E6002FCC08 /* Death_PongTests.h */ = {isa = PBXFileReference; path = Death_PongTests.h; sourceTree = "<group>"; };
+		959A18CB14FAB7E6002FCC08 /* Death_PongTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Death_PongTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		959A189114FAB7E6002FCC08 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				959A189914FAB7E6002FCC08 /* UIKit.framework in Frameworks */,
+				959A189B14FAB7E6002FCC08 /* Foundation.framework in Frameworks */,
+				959A189D14FAB7E6002FCC08 /* CoreGraphics.framework in Frameworks */,
+				959A189F14FAB7E6002FCC08 /* GLKit.framework in Frameworks */,
+				959A18A114FAB7E6002FCC08 /* OpenGLES.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		959A18B914FAB7E6002FCC08 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				959A18BF14FAB7E6002FCC08 /* SenTestingKit.framework in Frameworks */,
+				959A18C014FAB7E6002FCC08 /* UIKit.framework in Frameworks */,
+				959A18C114FAB7E6002FCC08 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		959A188914FAB7E5002FCC08 = {
+			isa = PBXGroup;
+			children = (
+				959A18A214FAB7E6002FCC08 /* Death Pong */,
+				959A18C414FAB7E6002FCC08 /* Death PongTests */,
+				959A189714FAB7E6002FCC08 /* Frameworks */,
+				959A189514FAB7E6002FCC08 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		959A189514FAB7E6002FCC08 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				959A189414FAB7E6002FCC08 /* Death Pong.app */,
+				959A18BD14FAB7E6002FCC08 /* Death PongTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		959A189714FAB7E6002FCC08 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				959A189814FAB7E6002FCC08 /* UIKit.framework */,
+				959A189A14FAB7E6002FCC08 /* Foundation.framework */,
+				959A189C14FAB7E6002FCC08 /* CoreGraphics.framework */,
+				959A189E14FAB7E6002FCC08 /* GLKit.framework */,
+				959A18A014FAB7E6002FCC08 /* OpenGLES.framework */,
+				959A18BE14FAB7E6002FCC08 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		959A18A214FAB7E6002FCC08 /* Death Pong */ = {
+			isa = PBXGroup;
+			children = (
+				959A18AB14FAB7E6002FCC08 /* BBJAppDelegate.h */,
+				959A18AC14FAB7E6002FCC08 /* BBJAppDelegate.m */,
+				959A18AE14FAB7E6002FCC08 /* MainStoryboard.storyboard */,
+				959A18B114FAB7E6002FCC08 /* Shader.fsh */,
+				959A18B314FAB7E6002FCC08 /* Shader.vsh */,
+				959A18B514FAB7E6002FCC08 /* BBJViewController.h */,
+				959A18B614FAB7E6002FCC08 /* BBJViewController.m */,
+				959A18A314FAB7E6002FCC08 /* Supporting Files */,
+			);
+			path = "Death Pong";
+			sourceTree = "<group>";
+		};
+		959A18A314FAB7E6002FCC08 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				959A18A414FAB7E6002FCC08 /* Death Pong-Info.plist */,
+				959A18A514FAB7E6002FCC08 /* InfoPlist.strings */,
+				959A18A814FAB7E6002FCC08 /* main.m */,
+				959A18AA14FAB7E6002FCC08 /* Death Pong-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		959A18C414FAB7E6002FCC08 /* Death PongTests */ = {
+			isa = PBXGroup;
+			children = (
+				959A18CA14FAB7E6002FCC08 /* Death_PongTests.h */,
+				959A18CB14FAB7E6002FCC08 /* Death_PongTests.m */,
+				959A18C514FAB7E6002FCC08 /* Supporting Files */,
+			);
+			path = "Death PongTests";
+			sourceTree = "<group>";
+		};
+		959A18C514FAB7E6002FCC08 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				959A18C614FAB7E6002FCC08 /* Death PongTests-Info.plist */,
+				959A18C714FAB7E6002FCC08 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		959A189314FAB7E6002FCC08 /* Death Pong */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 959A18CF14FAB7E6002FCC08 /* Build configuration list for PBXNativeTarget "Death Pong" */;
+			buildPhases = (
+				959A189014FAB7E6002FCC08 /* Sources */,
+				959A189114FAB7E6002FCC08 /* Frameworks */,
+				959A189214FAB7E6002FCC08 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Death Pong";
+			productName = "Death Pong";
+			productReference = 959A189414FAB7E6002FCC08 /* Death Pong.app */;
+			productType = "com.apple.product-type.application";
+		};
+		959A18BC14FAB7E6002FCC08 /* Death PongTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 959A18D214FAB7E6002FCC08 /* Build configuration list for PBXNativeTarget "Death PongTests" */;
+			buildPhases = (
+				959A18B814FAB7E6002FCC08 /* Sources */,
+				959A18B914FAB7E6002FCC08 /* Frameworks */,
+				959A18BA14FAB7E6002FCC08 /* Resources */,
+				959A18BB14FAB7E6002FCC08 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				959A18C314FAB7E6002FCC08 /* PBXTargetDependency */,
+			);
+			name = "Death PongTests";
+			productName = "Death PongTests";
+			productReference = 959A18BD14FAB7E6002FCC08 /* Death PongTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		959A188B14FAB7E5002FCC08 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 959A188E14FAB7E5002FCC08 /* Build configuration list for PBXProject "Death Pong" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 959A188914FAB7E5002FCC08;
+			productRefGroup = 959A189514FAB7E6002FCC08 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				959A189314FAB7E6002FCC08 /* Death Pong */,
+				959A18BC14FAB7E6002FCC08 /* Death PongTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		959A189214FAB7E6002FCC08 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				959A18A714FAB7E6002FCC08 /* InfoPlist.strings in Resources */,
+				959A18B014FAB7E6002FCC08 /* MainStoryboard.storyboard in Resources */,
+				959A18B214FAB7E6002FCC08 /* Shader.fsh in Resources */,
+				959A18B414FAB7E6002FCC08 /* Shader.vsh in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		959A18BA14FAB7E6002FCC08 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				959A18C914FAB7E6002FCC08 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		959A18BB14FAB7E6002FCC08 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		959A189014FAB7E6002FCC08 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				959A18A914FAB7E6002FCC08 /* main.m in Sources */,
+				959A18AD14FAB7E6002FCC08 /* BBJAppDelegate.m in Sources */,
+				959A18B714FAB7E6002FCC08 /* BBJViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		959A18B814FAB7E6002FCC08 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				959A18CC14FAB7E6002FCC08 /* Death_PongTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		959A18C314FAB7E6002FCC08 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 959A189314FAB7E6002FCC08 /* Death Pong */;
+			targetProxy = 959A18C214FAB7E6002FCC08 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		959A18A514FAB7E6002FCC08 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				959A18A614FAB7E6002FCC08 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		959A18AE14FAB7E6002FCC08 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				959A18AF14FAB7E6002FCC08 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		959A18C714FAB7E6002FCC08 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				959A18C814FAB7E6002FCC08 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		959A18CD14FAB7E6002FCC08 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		959A18CE14FAB7E6002FCC08 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		959A18D014FAB7E6002FCC08 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Death Pong/Death Pong-Prefix.pch";
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				INFOPLIST_FILE = "Death Pong/Death Pong-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		959A18D114FAB7E6002FCC08 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Death Pong/Death Pong-Prefix.pch";
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				INFOPLIST_FILE = "Death Pong/Death Pong-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		959A18D314FAB7E6002FCC08 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Death Pong.app/Death Pong";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Death Pong/Death Pong-Prefix.pch";
+				INFOPLIST_FILE = "Death PongTests/Death PongTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		959A18D414FAB7E6002FCC08 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Death Pong.app/Death Pong";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Death Pong/Death Pong-Prefix.pch";
+				INFOPLIST_FILE = "Death PongTests/Death PongTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		959A188E14FAB7E5002FCC08 /* Build configuration list for PBXProject "Death Pong" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				959A18CD14FAB7E6002FCC08 /* Debug */,
+				959A18CE14FAB7E6002FCC08 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		959A18CF14FAB7E6002FCC08 /* Build configuration list for PBXNativeTarget "Death Pong" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				959A18D014FAB7E6002FCC08 /* Debug */,
+				959A18D114FAB7E6002FCC08 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		959A18D214FAB7E6002FCC08 /* Build configuration list for PBXNativeTarget "Death PongTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				959A18D314FAB7E6002FCC08 /* Debug */,
+				959A18D414FAB7E6002FCC08 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 959A188B14FAB7E5002FCC08 /* Project object */;
+}
