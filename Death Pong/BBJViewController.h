@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
+#import <CoreMotion/CoreMotion.h>
+//#import <CoreMotion/CMMotionManager.h>
 
-@interface BBJViewController : GLKViewController
+@interface BBJViewController : GLKViewController <UIAccelerometerDelegate>
 
 @end

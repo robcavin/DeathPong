@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		958C31361504272F0096F903 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958C31351504272F0096F903 /* CoreMotion.framework */; };
 		959A189914FAB7E6002FCC08 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 959A189814FAB7E6002FCC08 /* UIKit.framework */; };
 		959A189B14FAB7E6002FCC08 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 959A189A14FAB7E6002FCC08 /* Foundation.framework */; };
 		959A189D14FAB7E6002FCC08 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 959A189C14FAB7E6002FCC08 /* CoreGraphics.framework */; };
@@ -37,28 +38,29 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		959A189414FAB7E6002FCC08 /* Death Pong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Death Pong.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		958C31351504272F0096F903 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		959A189414FAB7E6002FCC08 /* DeathPong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeathPong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		959A189814FAB7E6002FCC08 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		959A189A14FAB7E6002FCC08 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		959A189C14FAB7E6002FCC08 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		959A189E14FAB7E6002FCC08 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		959A18A014FAB7E6002FCC08 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		959A18A414FAB7E6002FCC08 /* Death Pong-Info.plist */ = {isa = PBXFileReference; path = "Death Pong-Info.plist"; sourceTree = "<group>"; };
+		959A18A414FAB7E6002FCC08 /* Death Pong-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Death Pong-Info.plist"; sourceTree = "<group>"; };
 		959A18A614FAB7E6002FCC08 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		959A18A814FAB7E6002FCC08 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		959A18AA14FAB7E6002FCC08 /* Death Pong-Prefix.pch */ = {isa = PBXFileReference; path = "Death Pong-Prefix.pch"; sourceTree = "<group>"; };
-		959A18AB14FAB7E6002FCC08 /* BBJAppDelegate.h */ = {isa = PBXFileReference; path = BBJAppDelegate.h; sourceTree = "<group>"; };
+		959A18AA14FAB7E6002FCC08 /* Death Pong-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Death Pong-Prefix.pch"; sourceTree = "<group>"; };
+		959A18AB14FAB7E6002FCC08 /* BBJAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BBJAppDelegate.h; sourceTree = "<group>"; };
 		959A18AC14FAB7E6002FCC08 /* BBJAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BBJAppDelegate.m; sourceTree = "<group>"; };
 		959A18AF14FAB7E6002FCC08 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		959A18B114FAB7E6002FCC08 /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
 		959A18B314FAB7E6002FCC08 /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
-		959A18B514FAB7E6002FCC08 /* BBJViewController.h */ = {isa = PBXFileReference; path = BBJViewController.h; sourceTree = "<group>"; };
+		959A18B514FAB7E6002FCC08 /* BBJViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BBJViewController.h; sourceTree = "<group>"; };
 		959A18B614FAB7E6002FCC08 /* BBJViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BBJViewController.m; sourceTree = "<group>"; };
 		959A18BD14FAB7E6002FCC08 /* Death PongTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Death PongTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		959A18BE14FAB7E6002FCC08 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		959A18C614FAB7E6002FCC08 /* Death PongTests-Info.plist */ = {isa = PBXFileReference; path = "Death PongTests-Info.plist"; sourceTree = "<group>"; };
+		959A18C614FAB7E6002FCC08 /* Death PongTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Death PongTests-Info.plist"; sourceTree = "<group>"; };
 		959A18C814FAB7E6002FCC08 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		959A18CA14FAB7E6002FCC08 /* Death_PongTests.h */ = {isa = PBXFileReference; path = Death_PongTests.h; sourceTree = "<group>"; };
+		959A18CA14FAB7E6002FCC08 /* Death_PongTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Death_PongTests.h; sourceTree = "<group>"; };
 		959A18CB14FAB7E6002FCC08 /* Death_PongTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Death_PongTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				958C31361504272F0096F903 /* CoreMotion.framework in Frameworks */,
 				959A189914FAB7E6002FCC08 /* UIKit.framework in Frameworks */,
 				959A189B14FAB7E6002FCC08 /* Foundation.framework in Frameworks */,
 				959A189D14FAB7E6002FCC08 /* CoreGraphics.framework in Frameworks */,
@@ -91,6 +94,7 @@
 		959A188914FAB7E5002FCC08 = {
 			isa = PBXGroup;
 			children = (
+				958C31351504272F0096F903 /* CoreMotion.framework */,
 				959A18A214FAB7E6002FCC08 /* Death Pong */,
 				959A18C414FAB7E6002FCC08 /* Death PongTests */,
 				959A189714FAB7E6002FCC08 /* Frameworks */,
@@ -101,7 +105,7 @@
 		959A189514FAB7E6002FCC08 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				959A189414FAB7E6002FCC08 /* Death Pong.app */,
+				959A189414FAB7E6002FCC08 /* DeathPong.app */,
 				959A18BD14FAB7E6002FCC08 /* Death PongTests.octest */,
 			);
 			name = Products;
@@ -168,9 +172,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		959A189314FAB7E6002FCC08 /* Death Pong */ = {
+		959A189314FAB7E6002FCC08 /* DeathPong */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 959A18CF14FAB7E6002FCC08 /* Build configuration list for PBXNativeTarget "Death Pong" */;
+			buildConfigurationList = 959A18CF14FAB7E6002FCC08 /* Build configuration list for PBXNativeTarget "DeathPong" */;
 			buildPhases = (
 				959A189014FAB7E6002FCC08 /* Sources */,
 				959A189114FAB7E6002FCC08 /* Frameworks */,
@@ -180,9 +184,9 @@
 			);
 			dependencies = (
 			);
-			name = "Death Pong";
+			name = DeathPong;
 			productName = "Death Pong";
-			productReference = 959A189414FAB7E6002FCC08 /* Death Pong.app */;
+			productReference = 959A189414FAB7E6002FCC08 /* DeathPong.app */;
 			productType = "com.apple.product-type.application";
 		};
 		959A18BC14FAB7E6002FCC08 /* Death PongTests */ = {
@@ -224,7 +228,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				959A189314FAB7E6002FCC08 /* Death Pong */,
+				959A189314FAB7E6002FCC08 /* DeathPong */,
 				959A18BC14FAB7E6002FCC08 /* Death PongTests */,
 			);
 		};
@@ -292,7 +296,7 @@
 /* Begin PBXTargetDependency section */
 		959A18C314FAB7E6002FCC08 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 959A189314FAB7E6002FCC08 /* Death Pong */;
+			target = 959A189314FAB7E6002FCC08 /* DeathPong */;
 			targetProxy = 959A18C214FAB7E6002FCC08 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -379,6 +383,7 @@
 				GCC_PREFIX_HEADER = "Death Pong/Death Pong-Prefix.pch";
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "Death Pong/Death Pong-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -391,6 +396,7 @@
 				GCC_PREFIX_HEADER = "Death Pong/Death Pong-Prefix.pch";
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "Death Pong/Death Pong-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -442,13 +448,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		959A18CF14FAB7E6002FCC08 /* Build configuration list for PBXNativeTarget "Death Pong" */ = {
+		959A18CF14FAB7E6002FCC08 /* Build configuration list for PBXNativeTarget "DeathPong" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				959A18D014FAB7E6002FCC08 /* Debug */,
 				959A18D114FAB7E6002FCC08 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		959A18D214FAB7E6002FCC08 /* Build configuration list for PBXNativeTarget "Death PongTests" */ = {
 			isa = XCConfigurationList;
@@ -457,6 +464,7 @@
 				959A18D414FAB7E6002FCC08 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

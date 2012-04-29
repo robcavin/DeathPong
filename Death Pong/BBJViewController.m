@@ -8,12 +8,15 @@
 
 #import "BBJViewController.h"
 
+
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
 // Uniform index.
 enum
 {
+    UNIFORM_LIGHT_POS,
     UNIFORM_MODELVIEWPROJECTION_MATRIX,
+    UNIFORM_MODELVIEW_MATRIX,
     UNIFORM_NORMAL_MATRIX,
     NUM_UNIFORMS
 };
@@ -27,10 +30,54 @@ enum
     NUM_ATTRIBUTES
 };
 
-GLfloat gCubeVertexData[216] = 
+GLfloat gCubeVertexData[432] = 
 {
     // Data layout for each line below is:
     // positionX, positionY, positionZ,     normalX, normalY, normalZ,
+    0.5f, -0.5f, -0.5f,        -1.0f, 0.0f, 0.0f,
+    0.5f, 0.5f, -0.5f,         -1.0f, 0.0f, 0.0f,
+    0.5f, -0.5f, 0.5f,         -1.0f, 0.0f, 0.0f,
+    0.5f, -0.5f, 0.5f,         -1.0f, 0.0f, 0.0f,
+    0.5f, 0.5f, 0.5f,          -1.0f, 0.0f, 0.0f,
+    0.5f, 0.5f, -0.5f,         -1.0f, 0.0f, 0.0f,
+    
+    0.5f, 0.5f, -0.5f,         0.0f, -1.0f, 0.0f,
+    -0.5f, 0.5f, -0.5f,        0.0f, -1.0f, 0.0f,
+    0.5f, 0.5f, 0.5f,          0.0f, -1.0f, 0.0f,
+    0.5f, 0.5f, 0.5f,          0.0f, -1.0f, 0.0f,
+    -0.5f, 0.5f, -0.5f,        0.0f, -1.0f, 0.0f,
+    -0.5f, 0.5f, 0.5f,         0.0f, -1.0f, 0.0f,
+    
+    -0.5f, 0.5f, -0.5f,        1.0f, 0.0f, 0.0f,
+    -0.5f, -0.5f, -0.5f,       1.0f, 0.0f, 0.0f,
+    -0.5f, 0.5f, 0.5f,         1.0f, 0.0f, 0.0f,
+    -0.5f, 0.5f, 0.5f,         1.0f, 0.0f, 0.0f,
+    -0.5f, -0.5f, -0.5f,       1.0f, 0.0f, 0.0f,
+    -0.5f, -0.5f, 0.5f,        1.0f, 0.0f, 0.0f,
+    
+    -0.5f, -0.5f, -0.5f,       0.0f, 1.0f, 0.0f,
+    0.5f, -0.5f, -0.5f,        0.0f, 1.0f, 0.0f,
+    -0.5f, -0.5f, 0.5f,        0.0f, 1.0f, 0.0f,
+    -0.5f, -0.5f, 0.5f,        0.0f, 1.0f, 0.0f,
+    0.5f, -0.5f, -0.5f,        0.0f, 1.0f, 0.0f,
+    0.5f, -0.5f, 0.5f,         0.0f, 1.0f, 0.0f,
+    
+    /*0.5f, 0.5f, 0.5f,          0.0f, 0.0f, 1.0f,
+    -0.5f, 0.5f, 0.5f,         0.0f, 0.0f, 1.0f,
+    0.5f, -0.5f, 0.5f,         0.0f, 0.0f, 1.0f,
+    0.5f, -0.5f, 0.5f,         0.0f, 0.0f, 1.0f,
+    -0.5f, 0.5f, 0.5f,         0.0f, 0.0f, 1.0f,
+    -0.5f, -0.5f, 0.5f,        0.0f, 0.0f, 1.0f,*/
+    
+    0.5f, -0.5f, -0.5f,        0.0f, 0.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f,       0.0f, 0.0f, 1.0f,
+    0.5f, 0.5f, -0.5f,         0.0f, 0.0f, 1.0f,
+    0.5f, 0.5f, -0.5f,         0.0f, 0.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f,       0.0f, 0.0f, 1.0f,
+    -0.5f, 0.5f, -0.5f,        0.0f, 0.0f, 1.0f,
+
+
+
     0.5f, -0.5f, -0.5f,        1.0f, 0.0f, 0.0f,
     0.5f, 0.5f, -0.5f,         1.0f, 0.0f, 0.0f,
     0.5f, -0.5f, 0.5f,         1.0f, 0.0f, 0.0f,
@@ -59,33 +106,59 @@ GLfloat gCubeVertexData[216] =
     0.5f, -0.5f, -0.5f,        0.0f, -1.0f, 0.0f,
     0.5f, -0.5f, 0.5f,         0.0f, -1.0f, 0.0f,
     
-    0.5f, 0.5f, 0.5f,          0.0f, 0.0f, 1.0f,
-    -0.5f, 0.5f, 0.5f,         0.0f, 0.0f, 1.0f,
-    0.5f, -0.5f, 0.5f,         0.0f, 0.0f, 1.0f,
-    0.5f, -0.5f, 0.5f,         0.0f, 0.0f, 1.0f,
-    -0.5f, 0.5f, 0.5f,         0.0f, 0.0f, 1.0f,
-    -0.5f, -0.5f, 0.5f,        0.0f, 0.0f, 1.0f,
+    0.5f, 0.5f, 0.5f,          0.0f, 0.0f,  1.0f,
+     -0.5f, 0.5f, 0.5f,         0.0f, 0.0f, 1.0f,
+     0.5f, -0.5f, 0.5f,         0.0f, 0.0f, 1.0f,
+     0.5f, -0.5f, 0.5f,         0.0f, 0.0f, 1.0f,
+     -0.5f, 0.5f, 0.5f,         0.0f, 0.0f, 1.0f,
+     -0.5f, -0.5f, 0.5f,        0.0f, 0.0f, 1.0f,
     
-    0.5f, -0.5f, -0.5f,        0.0f, 0.0f, -1.0f,
-    -0.5f, -0.5f, -0.5f,       0.0f, 0.0f, -1.0f,
-    0.5f, 0.5f, -0.5f,         0.0f, 0.0f, -1.0f,
-    0.5f, 0.5f, -0.5f,         0.0f, 0.0f, -1.0f,
-    -0.5f, -0.5f, -0.5f,       0.0f, 0.0f, -1.0f,
-    -0.5f, 0.5f, -0.5f,        0.0f, 0.0f, -1.0f
+   /*0.5f, -0.5f, -0.5f,        0.0f, 0.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f,       0.0f, 0.0f, 1.0f,
+    0.5f, 0.5f, -0.5f,         0.0f, 0.0f, 1.0f,
+    0.5f, 0.5f, -0.5f,         0.0f, 0.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f,       0.0f, 0.0f, 1.0f,
+    -0.5f, 0.5f, -0.5f,        0.0f, 0.0f, 1.0f*/
+
+
 };
 
 @interface BBJViewController () {
     GLuint _program;
     
     GLKMatrix4 _modelViewProjectionMatrix;
+    GLKMatrix4 _modelViewMatrix;
     GLKMatrix3 _normalMatrix;
     float _rotation;
+    float _x_rotation;
+    float _y_rotation;
+    float _x_translation;
+    float _y_translation;
+    
+    float accelX;
+    float accelY;
+    float accelZ;
     
     GLuint _vertexArray;
     GLuint _vertexBuffer;
+
+    GLKMatrix4 _ball_modelViewProjectionMatrix;
+    GLKMatrix4 _ball_modelViewMatrix;
+    GLKMatrix3 _ball_normalMatrix;
+
+    GLKVector3 _ballPos;
+    GLKVector3 _ballVel;
+    GLKVector3 _ballAccel;
+
+    GLKVector3 _playerPos;
+    GLKVector3 _playerVel;
+
+    GLKVector3 _lightPos;
+
 }
 @property (strong, nonatomic) EAGLContext *context;
 @property (strong, nonatomic) GLKBaseEffect *effect;
+@property (strong, nonatomic) CMMotionManager *motionManager;
 
 - (void)setupGL;
 - (void)tearDownGL;
@@ -100,6 +173,7 @@ GLfloat gCubeVertexData[216] =
 
 @synthesize context = _context;
 @synthesize effect = _effect;
+@synthesize motionManager;
 
 - (void)viewDidLoad
 {
@@ -114,6 +188,10 @@ GLfloat gCubeVertexData[216] =
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
+    
+    motionManager = [[CMMotionManager alloc] init]; // motionManager is an instance variable
+    motionManager.accelerometerUpdateInterval = 0.01; // 100Hz    
+    [motionManager startAccelerometerUpdates];
     
     [self setupGL];
 }
@@ -142,7 +220,7 @@ GLfloat gCubeVertexData[216] =
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
     } else {
-        return YES;
+        return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft);
     }
 }
 
@@ -155,6 +233,21 @@ GLfloat gCubeVertexData[216] =
     self.effect = [[GLKBaseEffect alloc] init];
     self.effect.light0.enabled = GL_TRUE;
     self.effect.light0.diffuseColor = GLKVector4Make(1.0f, 0.4f, 0.4f, 1.0f);
+    
+    _lightPos = GLKVector3Make(0.0, 0.0, -0.5);
+    
+    _ballPos = GLKVector3Make(0.0, 0.0, 0.0);
+    _ballVel = GLKVector3Make(-0.2, 0.3, -1.0);
+
+    _playerPos = GLKVector3Make(0.0, 0.0, 0.0);
+    _playerVel = GLKVector3Make(0.0, 0.0, 0.0);
+
+    _x_translation = 0.0;
+    _y_translation = 0.0;
+    
+    accelX = accelY = accelZ = 0;
+    
+    //_ballAccel = GLKVector3Make(-0.3, 0.2, -1);
     
     glEnable(GL_DEPTH_TEST);
     
@@ -190,33 +283,150 @@ GLfloat gCubeVertexData[216] =
 
 #pragma mark - GLKView and GLKViewController delegate methods
 
+#define kFilteringFactor 0.9
+
 - (void)update
 {
+    
+    
+
+    static int first = 1;
+    
+    CMAccelerometerData* data = motionManager.accelerometerData;
+
+    // Subtract the low-pass value from the current value to get a simplified high-pass filter
+
+    if (first) {
+        accelX = data.acceleration.x;// - ( (data.acceleration.x * kFilteringFactor) + (accelX * (1.0 - kFilteringFactor)) );
+        accelY = data.acceleration.y;// - ( (data.acceleration.y * kFilteringFactor) + (accelY * (1.0 - kFilteringFactor)) );
+        accelZ = data.acceleration.z;// - ( (data.acceleration.z * kFilteringFactor) + (accelZ * (1.0 - kFilteringFactor)) );
+        first = 0;
+    }
+    
+    GLKVector3 playerAccel = GLKVector3Make(10*(data.acceleration.x - accelX),10*(data.acceleration.y - accelY),10*(data.acceleration.z - accelZ));
+
+    accelX = data.acceleration.x;// - ( (data.acceleration.x * kFilteringFactor) + (accelX * (1.0 - kFilteringFactor)) );
+    accelY = data.acceleration.y;// - ( (data.acceleration.y * kFilteringFactor) + (accelY * (1.0 - kFilteringFactor)) );
+    accelZ = data.acceleration.z;// - ( (data.acceleration.z * kFilteringFactor) + (accelZ * (1.0 - kFilteringFactor)) );
+
+    
+    NSLog(@"%f %f %f", playerAccel.x, playerAccel.y, playerAccel.z);
+    _playerPos = GLKVector3Add(_playerPos,
+                             GLKVector3Add(GLKVector3MultiplyScalar(_playerVel, self.timeSinceLastUpdate),
+                                           GLKVector3MultiplyScalar(playerAccel, self.timeSinceLastUpdate*self.timeSinceLastUpdate)));
+    
+    _playerVel = GLKVector3Add(GLKVector3MultiplyScalar(_playerVel,1.0),
+                             GLKVector3MultiplyScalar(playerAccel, self.timeSinceLastUpdate));
+    
+    
+    if (_playerPos.x < -0.5) {_playerPos.x = -0.5; _playerVel.x = 0;}
+    if (_playerPos.x > 0.5) {_playerPos.x = 0.5; _playerVel.x = 0;}
+    if (_playerPos.y < -0.5) {_playerPos.y = -0.5; _playerVel.y = 0;}
+    if (_playerPos.y > 0.5) {_playerPos.y = 0.5; _playerVel.y = 0;}
+    if (_playerPos.z < -0.5) {_playerPos.z = -0.5; _playerVel.z = 0;}
+    if (_playerPos.z > 0.5) {_playerPos.z = 0.5; _playerVel.z = 0;}
+    
     float aspect = fabsf(self.view.bounds.size.width / self.view.bounds.size.height);
     GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 0.1f, 100.0f);
     
-    self.effect.transform.projectionMatrix = projectionMatrix;
+    //self.effect.transform.projectionMatrix = projectionMatrix;
+
+    GLKMatrix4 baseModelViewMatrix = GLKMatrix4MakeScale(1.0, 1.0, 1.0);
     
-    GLKMatrix4 baseModelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, -4.0f);
-    baseModelViewMatrix = GLKMatrix4Rotate(baseModelViewMatrix, _rotation, 0.0f, 1.0f, 0.0f);
+    baseModelViewMatrix = GLKMatrix4Rotate(baseModelViewMatrix,_x_rotation, 0.0f, 1.0f, 0.0f);
+    baseModelViewMatrix = GLKMatrix4Rotate(baseModelViewMatrix, _y_rotation, 1.0f, 0.0f, 0.0f);
+    baseModelViewMatrix = GLKMatrix4Translate(baseModelViewMatrix, _playerPos.x, _playerPos.y, -1.0f);
+
+    //baseModelViewMatrix = GLKMatrix4Rotate(baseModelViewMatrix, _rotation, 0.0f, 0.0f, 0.0f);
     
     // Compute the model view matrix for the object rendered with GLKit
-    GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, -1.5f);
-    modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, _rotation, 1.0f, 1.0f, 1.0f);
-    modelViewMatrix = GLKMatrix4Multiply(baseModelViewMatrix, modelViewMatrix);
+    //GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, -1.5f);
+    //modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, _rotation, 1.0f, 1.0f, 1.0f);
+    //modelViewMatrix = GLKMatrix4Multiply(baseModelViewMatrix, modelViewMatrix);
     
-    self.effect.transform.modelviewMatrix = modelViewMatrix;
+    //self.effect.transform.modelviewMatrix = modelViewMatrix;
     
     // Compute the model view matrix for the object rendered with ES2
-    modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, 1.5f);
-    modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, _rotation, 1.0f, 1.0f, 1.0f);
+    GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, 0.0f);
+    //modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, _rotation, 1.0f, 1.0f, 1.0f);
     modelViewMatrix = GLKMatrix4Multiply(baseModelViewMatrix, modelViewMatrix);
-    
+
+    //self.effect.transform.modelviewMatrix = modelViewMatrix;
+
     _normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelViewMatrix), NULL);
-    
+    _modelViewMatrix = modelViewMatrix;
     _modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
     
-    _rotation += self.timeSinceLastUpdate * 0.5f;
+    //_rotation += self.timeSinceLastUpdate * 0.5f;
+
+
+    // New code for ball
+    //GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, 0.0f);
+    
+    
+    _ballPos = GLKVector3Add(_ballPos,
+                             GLKVector3Add(GLKVector3MultiplyScalar(_ballVel, self.timeSinceLastUpdate),
+                                            GLKVector3MultiplyScalar(_ballAccel, self.timeSinceLastUpdate*self.timeSinceLastUpdate)));
+    
+    _ballVel = GLKVector3Add(GLKVector3MultiplyScalar(_ballVel,1.0),
+                             GLKVector3MultiplyScalar(_ballAccel, self.timeSinceLastUpdate));
+
+    _ballAccel = GLKVector3Make(0.0, 0.0, 0.0);
+    
+    if (_ballPos.x < -0.5) {
+        _ballVel.x = -_ballVel.x;
+        _ballPos.x = -0.5;
+    }
+    
+    if (_ballPos.x > 0.5) {
+        _ballVel.x = -_ballVel.x;
+        _ballPos.x = 0.5;
+    }
+    
+    if (_ballPos.y < -0.5) {
+        _ballVel.y = -_ballVel.y;
+        _ballPos.y = -0.5;
+    }
+    
+    if (_ballPos.y > 0.5) {
+        _ballVel.y = -_ballVel.y;
+        _ballPos.y = 0.5;
+    }
+    
+    if (_ballPos.z < -0.5) {
+        _ballVel.z = -_ballVel.z;
+        _ballPos.z = -0.5;
+    }
+    
+    if (_ballPos.z > 0.5) {
+        _ballVel.z = -_ballVel.z;
+        _ballPos.z = 0.5;
+    }
+    
+    modelViewMatrix = GLKMatrix4MakeTranslation(playerAccel.x, playerAccel.y, playerAccel.z);    
+    modelViewMatrix = GLKMatrix4Scale(modelViewMatrix, 0.05, 0.05, 0.05);
+
+    //modelViewMatrix = GLKMatrix4MakeScale(0.05, 0.05, 0.05);
+    //modelViewMatrix = GLKMatrix4Translate(modelViewMatrix,_ballPos.x, _ballPos.y, _ballPos.z);
+    //modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, _rotation, 1.0f, 1.0f, 1.0f);
+    modelViewMatrix = GLKMatrix4Multiply(baseModelViewMatrix, modelViewMatrix);
+/*    NSLog(@"%f %f %f %f\n%f %f %f %f\n%f %f %f %f\n%f %f %f %f",
+          modelViewMatrix.m00, modelViewMatrix.m01, modelViewMatrix.m02, modelViewMatrix.m03,
+          modelViewMatrix.m10, modelViewMatrix.m11,modelViewMatrix.m12, modelViewMatrix.m13,
+          modelViewMatrix.m20, modelViewMatrix.m21, modelViewMatrix.m22, modelViewMatrix.m23,
+          modelViewMatrix.m30, modelViewMatrix.m31, modelViewMatrix.m32, modelViewMatrix.m33);
+*/
+    _ball_normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelViewMatrix), NULL);    
+    _ball_modelViewMatrix = modelViewMatrix;
+    _ball_modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
+    
+    GLKVector4 transformedBallPos = GLKMatrix4MultiplyVector4(_ball_modelViewMatrix, GLKVector4MakeWithVector3(_ballPos, 1.0));
+    
+    _lightPos = GLKVector3Make(transformedBallPos.x / transformedBallPos.w,
+                               transformedBallPos.y / transformedBallPos.w,
+                               transformedBallPos.z / transformedBallPos.w);
+    
+    //NSLog(@"%f %f %f", transformedBallPos.x, transformedBallPos.y, transformedBallPos.z);
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
@@ -227,20 +437,67 @@ GLfloat gCubeVertexData[216] =
     glBindVertexArrayOES(_vertexArray);
     
     // Render the object with GLKit
-    [self.effect prepareToDraw];
+    //[self.effect prepareToDraw];
     
-    glDrawArrays(GL_TRIANGLES, 0, 36);
+    //glDrawArrays(GL_TRIANGLES, 0, 36);
     
     // Render the object again with ES2
     glUseProgram(_program);
-    
+
+    glUniform3fv(uniforms[UNIFORM_LIGHT_POS], 1, _lightPos.v);
+
     glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, _modelViewProjectionMatrix.m);
+    glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEW_MATRIX], 1, 0, _modelViewMatrix.m);
     glUniformMatrix3fv(uniforms[UNIFORM_NORMAL_MATRIX], 1, 0, _normalMatrix.m);
     
-    glDrawArrays(GL_TRIANGLES, 0, 36);
+    glDrawArrays(GL_TRIANGLES, 0, 30);
+    
+    glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, _ball_modelViewProjectionMatrix.m);
+    glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEW_MATRIX], 1, 0, _ball_modelViewMatrix.m);
+    glUniformMatrix3fv(uniforms[UNIFORM_NORMAL_MATRIX], 1, 0, _ball_normalMatrix.m);
+    glDrawArrays(GL_TRIANGLES, 30, 66);
+    
 }
 
 #pragma mark -  OpenGL ES 2 shader compilation
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    CGPoint curLoc, prevLoc;
+    CGPoint delta;
+    for (UITouch* touch in touches) {
+        curLoc = [touch locationInView:self.view];
+        prevLoc = [touch previousLocationInView:self.view];
+        delta = CGPointMake((curLoc.x - prevLoc.x),(curLoc.y - prevLoc.y));
+        
+        _x_rotation = 0.25*((curLoc.x - self.view.center.x) / self.view.bounds.size.width) * M_PI;
+        _y_rotation = 0.25*((curLoc.y - self.view.center.y) / self.view.bounds.size.height) * M_PI;
+        
+        _x_translation = ((curLoc.x - self.view.center.x) / self.view.bounds.size.width);
+        _y_translation = -((curLoc.y - self.view.center.y) / self.view.bounds.size.height);
+        
+    }
+}
+
+
+#define kAccelerometerFrequency        60.0 //Hz
+-(void)configureAccelerometer
+{
+    UIAccelerometer*  theAccelerometer = [UIAccelerometer sharedAccelerometer];
+    theAccelerometer.updateInterval = 1 / kAccelerometerFrequency;
+    
+    theAccelerometer.delegate = self;
+    // Delegate events begin immediately.
+}
+
+- (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
+{
+    UIAccelerationValue x, y, z;
+    x = acceleration.x;
+    y = acceleration.y;
+    z = acceleration.z;
+    
+    // Do something with the values.
+}
+
 
 - (BOOL)loadShaders
 {
@@ -297,7 +554,9 @@ GLfloat gCubeVertexData[216] =
     
     // Get uniform locations.
     uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX] = glGetUniformLocation(_program, "modelViewProjectionMatrix");
+    uniforms[UNIFORM_MODELVIEW_MATRIX] = glGetUniformLocation(_program, "modelViewMatrix");
     uniforms[UNIFORM_NORMAL_MATRIX] = glGetUniformLocation(_program, "normalMatrix");
+    uniforms[UNIFORM_LIGHT_POS] = glGetUniformLocation(_program, "lightPos");
     
     // Release vertex and fragment shaders.
     if (vertShader) {
