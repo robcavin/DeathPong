@@ -152,10 +152,14 @@ GLfloat gCubeVertexData[432] =
 
     GLKVector3 _playerPos;
     GLKVector3 _playerVel;
-
+    GLKVector3 _playerAccel;
+    
     GLKVector3 _lightPos;
+    
+    NSOperationQueue* queue;
 
 }
+
 @property (strong, nonatomic) EAGLContext *context;
 @property (strong, nonatomic) GLKBaseEffect *effect;
 @property (strong, nonatomic) CMMotionManager *motionManager;
@@ -190,9 +194,63 @@ GLfloat gCubeVertexData[432] =
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     
     motionManager = [[CMMotionManager alloc] init]; // motionManager is an instance variable
-    motionManager.accelerometerUpdateInterval = 0.01; // 100Hz    
-    [motionManager startAccelerometerUpdates];
+    //motionManager.accelerometerUpdateInterval = 0.01; // 100Hz    
+    //motionManager.gyroUpdateInterval = 0.01; // 100Hz    
+    motionManager.deviceMotionUpdateInterval = 0.01;
     
+    queue  = [[NSOperationQueue alloc] init];
+    [motionManager startDeviceMotionUpdatesToQueue:queue withHandler:^(CMDeviceMotion *motion, NSError *error) {
+        static NSTimeInterval prevUpdateTimestamp = 0;
+        
+        CMAcceleration aData = motion.userAcceleration;
+        CMAttitude* attitude = motion.attitude;
+        
+        // Subtract the low-pass value from the current value to get a simplified high-pass filter
+        
+        /*if (first) {
+            accelX = aData.acceleration.x;// - ( (data.acceleration.x * kFilteringFactor) + (accelX * (1.0 - kFilteringFactor)) );
+            accelY = aData.acceleration.y;// - ( (data.acceleration.y * kFilteringFactor) + (accelY * (1.0 - kFilteringFactor)) );
+            accelZ = aData.acceleration.z;// - ( (data.acceleration.z * kFilteringFactor) + (accelZ * (1.0 - kFilteringFactor)) );
+            first = 0;
+        }*/
+        
+        //_playerAccel = GLKVector3Make(10*(aData.acceleration.x - accelX),10*(aData.acceleration.y - accelY),10*(aData.acceleration.z - accelZ));
+        
+        /*accelX = aData.acceleration.x;// - ( (data.acceleration.x * kFilteringFactor) + (accelX * (1.0 - kFilteringFactor)) );
+        accelY = aData.acceleration.y;// - ( (data.acceleration.y * kFilteringFactor) + (accelY * (1.0 - kFilteringFactor)) );
+        accelZ = aData.acceleration.z;// - ( (data.acceleration.z * kFilteringFactor) + (accelZ * (1.0 - kFilteringFactor)) );
+        */
+        GLKMatrix3 rotation = GLKMatrix3Make(
+                                             (float)attitude.rotationMatrix.m11, (float)attitude.rotationMatrix.m12, (float)attitude.rotationMatrix.m13, 
+                                             (float)attitude.rotationMatrix.m21, (float)attitude.rotationMatrix.m22, (float)attitude.rotationMatrix.m23, 
+                                             (float)attitude.rotationMatrix.m31, (float)attitude.rotationMatrix.m32, (float)attitude.rotationMatrix.m33);
+        
+        _playerAccel = GLKMatrix3MultiplyVector3(rotation,GLKVector3Make(10*(float)aData.x, 10*(float)aData.z, 10*(float)aData.y));
+        //GLKVector3 gravity = GLKMatrix3MultiplyVector3(rotation,GLKVector3Make((float)motion.gravity.x, (float)motion.gravity.y, (float)motion.gravity.z));
+        
+        NSTimeInterval timeSinceLastUpdate = motion.timestamp - prevUpdateTimestamp;
+        NSLog(@"accel = %f %f %f %f %d", _playerAccel.x, _playerAccel.y, _playerAccel.z, timeSinceLastUpdate,queue.operationCount);
+        //NSLog(@"gravity = %f %f %f %f %d", gravity.x, gravity.y, gravity.z, timeSinceLastUpdate,queue.operationCount);
+        
+        _playerPos = GLKVector3Add(_playerPos,
+                                   GLKVector3Add(GLKVector3MultiplyScalar(_playerVel, timeSinceLastUpdate),
+                                                 GLKVector3MultiplyScalar(_playerAccel, timeSinceLastUpdate*timeSinceLastUpdate)));
+        
+        _playerVel = GLKVector3Add(GLKVector3MultiplyScalar(_playerVel,0.9),
+                                   GLKVector3MultiplyScalar(_playerAccel, self.timeSinceLastUpdate));
+        
+        
+        if (_playerPos.x < -0.5) {_playerPos.x = -0.5; _playerVel.x = 0;}
+        if (_playerPos.x > 0.5) {_playerPos.x = 0.5; _playerVel.x = 0;}
+        if (_playerPos.y < -0.5) {_playerPos.y = -0.5; _playerVel.y = 0;}
+        if (_playerPos.y > 0.5) {_playerPos.y = 0.5; _playerVel.y = 0;}
+        if (_playerPos.z < -0.5) {_playerPos.z = -0.5; _playerVel.z = 0;}
+        if (_playerPos.z > 0.5) {_playerPos.z = 0.5; _playerVel.z = 0;}
+        
+        
+        prevUpdateTimestamp = motion.timestamp;
+    }];
+     
     [self setupGL];
 }
 
@@ -289,43 +347,6 @@ GLfloat gCubeVertexData[432] =
 {
     
     
-
-    static int first = 1;
-    
-    CMAccelerometerData* data = motionManager.accelerometerData;
-
-    // Subtract the low-pass value from the current value to get a simplified high-pass filter
-
-    if (first) {
-        accelX = data.acceleration.x;// - ( (data.acceleration.x * kFilteringFactor) + (accelX * (1.0 - kFilteringFactor)) );
-        accelY = data.acceleration.y;// - ( (data.acceleration.y * kFilteringFactor) + (accelY * (1.0 - kFilteringFactor)) );
-        accelZ = data.acceleration.z;// - ( (data.acceleration.z * kFilteringFactor) + (accelZ * (1.0 - kFilteringFactor)) );
-        first = 0;
-    }
-    
-    GLKVector3 playerAccel = GLKVector3Make(10*(data.acceleration.x - accelX),10*(data.acceleration.y - accelY),10*(data.acceleration.z - accelZ));
-
-    accelX = data.acceleration.x;// - ( (data.acceleration.x * kFilteringFactor) + (accelX * (1.0 - kFilteringFactor)) );
-    accelY = data.acceleration.y;// - ( (data.acceleration.y * kFilteringFactor) + (accelY * (1.0 - kFilteringFactor)) );
-    accelZ = data.acceleration.z;// - ( (data.acceleration.z * kFilteringFactor) + (accelZ * (1.0 - kFilteringFactor)) );
-
-    
-    NSLog(@"%f %f %f", playerAccel.x, playerAccel.y, playerAccel.z);
-    _playerPos = GLKVector3Add(_playerPos,
-                             GLKVector3Add(GLKVector3MultiplyScalar(_playerVel, self.timeSinceLastUpdate),
-                                           GLKVector3MultiplyScalar(playerAccel, self.timeSinceLastUpdate*self.timeSinceLastUpdate)));
-    
-    _playerVel = GLKVector3Add(GLKVector3MultiplyScalar(_playerVel,1.0),
-                             GLKVector3MultiplyScalar(playerAccel, self.timeSinceLastUpdate));
-    
-    
-    if (_playerPos.x < -0.5) {_playerPos.x = -0.5; _playerVel.x = 0;}
-    if (_playerPos.x > 0.5) {_playerPos.x = 0.5; _playerVel.x = 0;}
-    if (_playerPos.y < -0.5) {_playerPos.y = -0.5; _playerVel.y = 0;}
-    if (_playerPos.y > 0.5) {_playerPos.y = 0.5; _playerVel.y = 0;}
-    if (_playerPos.z < -0.5) {_playerPos.z = -0.5; _playerVel.z = 0;}
-    if (_playerPos.z > 0.5) {_playerPos.z = 0.5; _playerVel.z = 0;}
-    
     float aspect = fabsf(self.view.bounds.size.width / self.view.bounds.size.height);
     GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 0.1f, 100.0f);
     
@@ -335,8 +356,9 @@ GLfloat gCubeVertexData[432] =
     
     baseModelViewMatrix = GLKMatrix4Rotate(baseModelViewMatrix,_x_rotation, 0.0f, 1.0f, 0.0f);
     baseModelViewMatrix = GLKMatrix4Rotate(baseModelViewMatrix, _y_rotation, 1.0f, 0.0f, 0.0f);
-    baseModelViewMatrix = GLKMatrix4Translate(baseModelViewMatrix, _playerPos.x, _playerPos.y, -1.0f);
-
+    //baseModelViewMatrix = GLKMatrix4Translate(baseModelViewMatrix, _playerPos.x, _playerPos.y, -1.0f);
+    baseModelViewMatrix = GLKMatrix4Translate(baseModelViewMatrix, 0, 0, -2.0f);
+    
     //baseModelViewMatrix = GLKMatrix4Rotate(baseModelViewMatrix, _rotation, 0.0f, 0.0f, 0.0f);
     
     // Compute the model view matrix for the object rendered with GLKit
@@ -403,7 +425,7 @@ GLfloat gCubeVertexData[432] =
         _ballPos.z = 0.5;
     }
     
-    modelViewMatrix = GLKMatrix4MakeTranslation(playerAccel.x, playerAccel.y, playerAccel.z);    
+    modelViewMatrix = GLKMatrix4MakeTranslation(_playerPos.x, _playerPos.y, _playerPos.z);    
     modelViewMatrix = GLKMatrix4Scale(modelViewMatrix, 0.05, 0.05, 0.05);
 
     //modelViewMatrix = GLKMatrix4MakeScale(0.05, 0.05, 0.05);
@@ -490,12 +512,49 @@ GLfloat gCubeVertexData[432] =
 
 - (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
 {
-    UIAccelerationValue x, y, z;
-    x = acceleration.x;
-    y = acceleration.y;
-    z = acceleration.z;
+    static NSTimeInterval prevUpdateTimestamp = 0;
     
-    // Do something with the values.
+    CMAccelerometerData* aData = motionManager.accelerometerData;
+   
+    static int first = 1;
+        
+    // Subtract the low-pass value from the current value to get a simplified high-pass filter
+    
+    if (first) {
+        accelX = aData.acceleration.x;// - ( (data.acceleration.x * kFilteringFactor) + (accelX * (1.0 - kFilteringFactor)) );
+        accelY = aData.acceleration.y;// - ( (data.acceleration.y * kFilteringFactor) + (accelY * (1.0 - kFilteringFactor)) );
+        accelZ = aData.acceleration.z;// - ( (data.acceleration.z * kFilteringFactor) + (accelZ * (1.0 - kFilteringFactor)) );
+        first = 0;
+    }
+    
+    _playerAccel = GLKVector3Make(10*(aData.acceleration.x - accelX),10*(aData.acceleration.y - accelY),10*(aData.acceleration.z - accelZ));
+    
+    accelX = aData.acceleration.x;// - ( (data.acceleration.x * kFilteringFactor) + (accelX * (1.0 - kFilteringFactor)) );
+    accelY = aData.acceleration.y;// - ( (data.acceleration.y * kFilteringFactor) + (accelY * (1.0 - kFilteringFactor)) );
+    accelZ = aData.acceleration.z;// - ( (data.acceleration.z * kFilteringFactor) + (accelZ * (1.0 - kFilteringFactor)) );
+    
+    
+    NSLog(@"%f %f %f", _playerAccel.x, _playerAccel.y, _playerAccel.z);
+    NSTimeInterval timeSinceLastUpdate = aData.timestamp - prevUpdateTimestamp;
+
+    _playerPos = GLKVector3Add(_playerPos,
+                               GLKVector3Add(GLKVector3MultiplyScalar(_playerVel, timeSinceLastUpdate),
+                                             GLKVector3MultiplyScalar(_playerAccel, timeSinceLastUpdate*timeSinceLastUpdate)));
+    
+    _playerVel = GLKVector3Add(GLKVector3MultiplyScalar(_playerVel,1.0),
+                               GLKVector3MultiplyScalar(_playerAccel, self.timeSinceLastUpdate));
+    
+    
+    if (_playerPos.x < -0.5) {_playerPos.x = -0.5; _playerVel.x = 0;}
+    if (_playerPos.x > 0.5) {_playerPos.x = 0.5; _playerVel.x = 0;}
+    if (_playerPos.y < -0.5) {_playerPos.y = -0.5; _playerVel.y = 0;}
+    if (_playerPos.y > 0.5) {_playerPos.y = 0.5; _playerVel.y = 0;}
+    if (_playerPos.z < -0.5) {_playerPos.z = -0.5; _playerVel.z = 0;}
+    if (_playerPos.z > 0.5) {_playerPos.z = 0.5; _playerVel.z = 0;}
+    
+
+    prevUpdateTimestamp = aData.timestamp;
+
 }
 
 
